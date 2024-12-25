@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ABDULLTHON</title>
+    <meta charset="utf-8">
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../aos.css"/> -->
+     <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  </head>
+  <body>
+    
+<div class="alertmessage">
+      <h3 id="alertText"></h3>
+    </div>
+
+<section class="section">
+  <div class="form">
+    <span>
+      <h2 class="animate__animated animate__slideInLeft animate__delay-1s">LOGIN!</h2><br>
+      <p>Welcome Back login!</p>
+    </span>
+     <div >
+          <input type="text" 
+           placeholder="Name..." id="name">
+          <img src="user-svgrepo-com.svg" id="input_img" class="animate__animated animate__flipInX animate__delay-.7s">
+    </div>
+    <div>
+      <input type="email"  placeholder="Email..." id="email">
+      <img src="email-1572-svgrepo-com.svg" id="input_img" class="animate__animated animate__flipInX animate__delay-.7s">
+    </div>
+    <div>
+      <input type="password" placeholder="Password" id="password">
+      <img src="password-lock-svgrepo-com.svg" id="input_img" class="animate__animated animate__flipInX animate__delay-
+      .7s">
+    </div>
+    
+    <button id="submit">Login</button>
+    <h6>Don't have an account?</h6><a href="signup.html">Signup</a>
+  </div>
+</section>
+
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { getDatabase, ref, set, query, orderByChild, equalTo, get, push,onValue } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+
+
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyCG8InYb_aOTFIxdQ6IhGXfYG09a2xQGPg",
+  authDomain: "chatapp-852ea.firebaseapp.com",
+  databaseURL: "https://chatapp-852ea-default-rtdb.firebaseio.com",
+  projectId: "chatapp-852ea",
+  storageBucket: "chatapp-852ea.firebasestorage.app",
+  messagingSenderId: "987013807085",
+  appId: "1:987013807085:web:f5ee18b23d6fe30d8d05e4",
+  measurementId: "G-NGN089EERQ"
+};
+
+  // Initialize Firebase
+  // const analytics = getAnalytics(app);
+
+let alertmessage=document.querySelector('.alertmessage')
+let alertText=document.getElementById('alertText')
+ 
+  function alertMessage(text,danger){
+   if(danger){
+     alertText.innerHTML='<img src="img/497789.png" style="width:23px;height:23px;margin-right:6px">'+text
+     alertmessage.classList.add('alert_show')
+     alertmessage.classList.add('animate__animated', 'animate__slideInRight');
+     setTimeout(()=>{
+      alertmessage.classList.remove('alert_show')
+     alertmessage.classList.remove('animate__animated', 'animate__slideInRight');
+     },2000)
+   }else{
+     alertText.innerHTML='<img src="img/1827422.png" style="width:23px;height:23px;margin-right:6px">'+text
+     alertmessage.classList.add('alert_show')
+     alertmessage.classList.add('animate__animated', 'animate__slideInRight');
+     setTimeout(()=>{
+      alertmessage.classList.remove('alert_show')
+     alertmessage.classList.remove('animate__animated', 'animate__slideInRight');
+     },2000)
+   }
+     
+     
+ }
+ const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+
+// DOM Elements
+const signupForm = document.getElementById("submit");
+const message = document.getElementById("message");
+const name = document.getElementById("name").value
+signupForm.addEventListener("click", async (e) => {
+  e.preventDefault();
+          signupForm.disabled=true;
+          signupForm.innerHTML='<div class="loader"></div>';
+  // Fetch input values
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  if (!name || !email || !password) {
+    alertMessage("All fields are required!", true);
+    return;
+  }
+  try {
+    // Check if the name is unique
+    const dbRef = ref(db, "Users");
+    const snapshot = await get(dbRef);
+
+    if (snapshot.exists()) {
+      const users = snapshot.val();
+      const isNameTaken = Object.values(users).some((user) => user.name === name);
+
+      if (isNameTaken) {
+    localStorage.setItem('chat_name',name)
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    alertMessage("Signup successful!", false);
+    setTimeout(()=>{
+      window.location='../chatting.html'
+    },2000)
+      }else{
+      signupForm.disabled=false;
+          signupForm.innerHTML='SIGNUP';
+        alertMessage('NAME DOES NOT EXIST',true)
+      }
+    }
+
+    // Create a new user with email and password
+    
+
+    // Add the user to the database
+    
+  } catch (error) {
+    alertMessage(`Error: ${error.message}`, true);
+  }
+});
+</script>
+
+  </body>
+</html>

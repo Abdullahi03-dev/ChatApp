@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="style2.css">
+	<title></title>
+</head>
+<body>
+	<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+	<section class="section1">
+		
+		<aside>
+			<h2>USERS</h2>
+			<div class="users_list">
+				
+			</div>
+			
+		</aside>
+
+
+
+
+<div class="navbar">
+	<span>
+		<img src="img/closebtn.png" id="closebtn">
+	</span>
+	<a href="#">USERS LIST</a>
+	<a href="#">LOGOUT</a>
+	
+</div>
+
+
+
+		<main>
+			<nav>
+				<h2><pre></pre>CODE<></></h2>
+				<img src="img/2311524.png" id="navbar">
+			</nav>
+			<div class="chats_display">
+				
+
+				<!-- <div class="sent_chats">
+					<h6 class="user">Abdullahi</h6>
+					<h3>hi</h3>
+					<h6 class="time">12:23</h6>
+				</div>
+				<div class="sent_chats">
+					<h6 class="user">Abdullahi</h6>
+					<h3>HELLO GUYS WELCOMES</h3>
+					<h6 class="time">12:23</h6>
+				</div>
+
+<div class="recieve_chats">
+	<h6 class="user">Abdullahi</h6>
+					<h3>hello</h3>
+					<h6 class="time">12:23</h6>
+				</div> -->
+				<!-- 
+				
+				<div class="sent_chats">
+					<h3>how are you doing bro</h3>
+				</div>
+				<div class="sent_chats">
+					<h3>am fine so this app is workin</h3>
+				</div>
+				<div class="recieve_chats">
+					<h3>is is working oo,thank God</h3>
+				</div>
+				<div class="sent_chats">
+					<h3>SO WHAT IS POPPING</h3>
+				</div><div class="sent_chats">
+					<h3>SO WHAT IS POPPING</h3>
+				</div><div class="sent_chats">
+					<h3>SO WHAT IS POPPING</h3>
+				</div><div class="sent_chats">
+					<h3>SO WHAT IS POPPING</h3>
+				</div><div class="sent_chats">
+					<h3>SO WHAT IS POPPING</h3>
+				</div><div class="sent_chats">
+					<h3>SO WHAT IS POPPING</h3>
+				</div><div class="sent_chats">
+					<h3>SO WHAT IS POPPING</h3>
+				</div><div class="sent_chats">
+					<h3>SO WHAT IS POPPING</h3>
+				</div><div class="sent_chats">
+					<h3>SO WHAT IS POPPING</h3>
+				</div><div class="sent_chats">
+					<h3>SO WHAT IS POPPING</h3>
+				</div><div class="sent_chats">
+					<h3>SO WHAT IS POPPING</h3>
+				</div><div class="sent_chats">
+					<h3>SO WHAT IS POPPING</h3>
+				</div> -->
+			</div>
+			<div class="bottom_input">
+					<input type="text" name="" id="input">
+					<img src="img/1477153.png" id="send_btn">
+			</div>
+		</main>
+	</section>
+
+<script src="index.js"></script>
+<script type="module">
+
+	// Import Firebase modules
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import { getDatabase, ref, onValue,push,get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCG8InYb_aOTFIxdQ6IhGXfYG09a2xQGPg",
+  authDomain: "chatapp-852ea.firebaseapp.com",
+  databaseURL: "https://chatapp-852ea-default-rtdb.firebaseio.com",
+  projectId: "chatapp-852ea",
+  storageBucket: "chatapp-852ea.firebasestorage.app",
+  messagingSenderId: "987013807085",
+  appId: "1:987013807085:web:f5ee18b23d6fe30d8d05e4",
+  measurementId: "G-NGN089EERQ"
+};
+let loader_page=document.querySelector('.js-preloader');
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// DOM Elements
+const container = document.querySelector(".chats_display");
+// const container2 = document.getElementById("container2");
+
+// Reference to the messages in the database
+const messagesRef = ref(db, "messages");
+
+// Listen for each child added in the database
+onValue(messagesRef, (snapshot) => {
+  const messages = snapshot.val();
+
+  for (let key in messages) {
+    const messageData = messages[key];
+    const messageElement = document.createElement("h3");
+    const sendertag = document.createElement("h6");
+    sendertag.className='user';
+   const timetag=document.createElement("h6");
+    const timetag2=document.createElement("h6")
+    timetag.className='time';
+    timetag2.className="time2"
+    messageElement.textContent = `${messageData.message}`;
+    sendertag.textContent=`${messageData.name}`
+    timetag.textContent=`${messageData.time}`
+timetag2.textContent=`${messageData.time}`
+
+    if (messageData.name === 'Ibn abbas03') {
+      const sent_chats=document.createElement('div')
+      sent_chats.className='sent_chats';
+      sent_chats.appendChild(sendertag)
+      sent_chats.appendChild(timetag)
+      sent_chats.appendChild(messageElement)
+      container.appendChild(sent_chats);
+    } else {
+      const receive_chats=document.createElement('div')
+      receive_chats.className='recieve_chats';
+      receive_chats.appendChild(sendertag)
+      receive_chats.appendChild(timetag2)
+    receive_chats.appendChild(messageElement)
+      container.appendChild(receive_chats);
+    }
+  }
+
+chats_display.scrollTop=chats_display.scrollHeight
+loader_page.classList.add('remove_loader')
+});
+
+
+
+let asideUsers=document.querySelector('.users_list')
+let sendbtn=document.getElementById('send_btn')
+let input=document.getElementById('input')
+let chats_display=document.querySelector('.chats_display')
+let date=new Date()
+let hour=date.getHours()
+let minute=date.getMinutes()
+const ampm=hour>=12?'pm':'am';
+const time=`${hour%12||12}:${minute.toString().padStart(2,'0')} ${ampm}`
+sendbtn.addEventListener('click',()=>{
+	const dbref=ref(db,'messages');
+	push(dbref,{
+		name: localStorage.getItem('chat_name'),
+		message:input.value,
+		time:time,
+	})
+	input.value=''
+	chats_display.scrollTop=chats_display.scrollHeight
+})
+
+
+	const dbref=ref(db,'Users');
+async function showUsers(){
+	try{
+		const snapshot=await get(dbref)
+		if (snapshot.exists()) {
+			let usersDiv=document.createElement('div')
+			// let usersh4=document.createElement('h4')
+			const users=snapshot.val();
+			const names=Object.values(users).map(user=>{
+				usersDiv.innerHTML=`<h4>${user.name}</h4>`
+			});
+			asideUsers.appendChild(usersDiv)
+		}else{
+			console.log('no data')
+		}
+	}catch(err){
+		console.log(err)
+	}
+}
+showUsers()
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
