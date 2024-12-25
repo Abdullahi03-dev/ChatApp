@@ -159,7 +159,7 @@ onValue(messagesRef, (snapshot) => {
     timetag.textContent=`${messageData.time}`
 timetag2.textContent=`${messageData.time}`
 
-    if (messageData.name === 'Ibn abbas03') {
+    if (messageData.name === localStorage.getItem('chat_name')) {
       const sent_chats=document.createElement('div')
       sent_chats.className='sent_chats';
       sent_chats.appendChild(sendertag)
