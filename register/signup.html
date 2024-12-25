@@ -79,7 +79,7 @@ let alertText=document.getElementById('alertText')
  
   function alertMessage(text,danger){
    if(danger){
-     alertText.innerHTML='<img src="img/497789.png" style="width:23px;height:23px;margin-right:6px">'+text
+     alertText.innerHTML='<img src="../img/497789.png" style="width:23px;height:23px;margin-right:6px">'+text
      alertmessage.classList.add('alert_show')
      alertmessage.classList.add('animate__animated', 'animate__slideInRight');
      setTimeout(()=>{
@@ -87,7 +87,7 @@ let alertText=document.getElementById('alertText')
      alertmessage.classList.remove('animate__animated', 'animate__slideInRight');
      },2000)
    }else{
-     alertText.innerHTML='<img src="img/1827422.png" style="width:23px;height:23px;margin-right:6px">'+text
+     alertText.innerHTML='<img src="../img/1827422.png" style="width:23px;height:23px;margin-right:6px">'+text
      alertmessage.classList.add('alert_show')
      alertmessage.classList.add('animate__animated', 'animate__slideInRight');
      setTimeout(()=>{
