@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="style2.css">
 	<title></title>
 </head>
-<body>
+<body id="bg">
 	<div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
       <span class="dot"></span>
@@ -36,9 +36,18 @@
 	<span>
 		<img src="img/closebtn.png" id="closebtn">
 	</span>
-	<a href="#">USERS LIST</a>
-	<a href="#">LOGOUT</a>
-	
+	<a href="#" id="logout">LOGOUT</a>
+	<div class="layer_1">
+    <div class="dropDown">
+    <h3 id="ques_show">THEMES<img src="img/2722987.png" style="height:20px;"></img></h3>
+    <div class="dropDown1" id="dropDown2">
+      <a href="" id="links_2" name="#191a22">VULKAN</a>
+      <a href="" id="links_2" name="#15171C">DEEP SPACE</a>
+      <a href="" id="links_2" name="#121415">DARK SLATE</a>
+    </div>
+  </div>
+  </div>
+
 </div>
 
 
@@ -232,7 +241,48 @@ showUsers()
 
 
 
+document.getElementById('logout').addEventListener('click',(e)=>{
+	e.preventDefault();
 
+	localStorage.removeItem('chat_name');
+	if (localStorage.removeItem('chat_name')) {
+		window.location='register/login.html'
+	}
+})
+ let dropDown2=document.querySelector('#dropDown2')
+    let time_show2=document.querySelector('#ques_show')
+    let links2=document.querySelectorAll('#links_2')
+    time_show2.addEventListener('click',(e)=>{
+      dropDown2.classList.toggle('drop_show')
+    })
+let click2=false
+    links2.forEach((link2)=>{
+      link2.addEventListener('click',(f)=>{
+        f.preventDefault()
+      time_show2.innerHTML=link2.innerHTML+'<img src="img/2722987.png" style="20px;height:20px;"></img>'
+       dropDown2.classList.remove('drop_show')
+
+
+
+      })
+    })
+    let bg=document.getElementById('bg')
+    function bgToggler() {
+      links2.forEach((link2)=>{
+      link2.addEventListener('click',(f)=>{
+        f.preventDefault()
+        let color=link2.name;
+        bg.style.backgroundColor=color
+        localStorage.setItem('themes',color)
+      })
+    })
+    }
+bgToggler()
+
+window.onload=()=>{
+  let gottenColor=localStorage.getItem('themes')
+  bg.style.backgroundColor=gottenColor
+}
 
 </script>
 </body>

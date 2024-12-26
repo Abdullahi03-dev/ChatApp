@@ -36,7 +36,7 @@ body{
 	z-index: 2000000;
 	display: none;
 }
-.navbar a{
+.navbar>a{
 	width: 120px;
 	border:none;
 	text-decoration: none;
@@ -76,6 +76,103 @@ body{
 	opacity: 1;
 	}
 }
+
+
+
+
+
+
+
+
+
+ .layer_1{
+  width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    margin: 0 auto;
+    margin-top:6px;
+    margin-bottom:15px;
+}
+/*.layer_1 div{
+  width: 150px;
+  text-align: left;
+  justify-content: flex-start;
+}*/
+.dropDown{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.dropDown h3{
+  cursor: pointer;
+  font-weight:600;
+  font-size: 15px;
+  margin:0;
+  color: black;
+	background-color:rgb(165, 172, 225);
+	padding: 5px 30px;
+	font-weight: 700;
+	border-radius: 20px;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.dropDown1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background:#191a22;
+  border-radius:16px;
+  padding:0 30px;
+  height: 0;
+  overflow-y: hidden;
+}
+.dropDown1 a{
+  color:white;
+text-decoration:none;
+  font-size: 16px;
+  display: block;
+  font-weight:600;
+  margin: 5px auto;
+  background: transparent;
+}
+.drop_show{
+  transition: .5s;
+  height: 100px;
+  /*animation: animation 10s;*/
+}
+@keyframes animation {
+  from{
+    height: 0;
+  }
+  to{
+   height: 30px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .section1{
 	display: flex;
 	align-items: center;
@@ -180,7 +277,7 @@ nav  h2{
 }
 main .bottom_input{
 	padding:.70rem 0;
-	background-color: #191a22;
+	background-color: inherit;
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
@@ -358,10 +455,10 @@ padding-right:0px;
 .recieve_chats .time2{
 	color:rgba(255,255,255,0.6);
 	position: relative;
-	right: 10px;
+	left: 6px;
 	padding-bottom: 3px;
 	font-size: 13px;
-	display: inline-block;
+	display: block;
 	z-index: 10000;
 }
 .sent_chats .user{
