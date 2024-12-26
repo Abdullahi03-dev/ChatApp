@@ -196,6 +196,9 @@ let sendbtn=document.getElementById('send_btn')
 let input=document.getElementById('input')
 let chats_display=document.querySelector('.chats_display')
 sendbtn.addEventListener('click',()=>{
+	if(input.value==""){
+		return
+	}
 container.innerHTML=''
 let date=new Date()
 let hour=date.getHours()
