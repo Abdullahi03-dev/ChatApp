@@ -186,12 +186,13 @@ let asideUsers=document.querySelector('.users_list')
 let sendbtn=document.getElementById('send_btn')
 let input=document.getElementById('input')
 let chats_display=document.querySelector('.chats_display')
+sendbtn.addEventListener('click',()=>{
+container.innerHTML=''
 let date=new Date()
 let hour=date.getHours()
 let minute=date.getMinutes()
 const ampm=hour>=12?'pm':'am';
 const time=`${hour%12||12}:${minute.toString().padStart(2,'0')} ${ampm}`
-sendbtn.addEventListener('click',()=>{
 	const dbref=ref(db,'messages');
 	push(dbref,{
 		name: localStorage.getItem('chat_name'),
